@@ -18,15 +18,16 @@ const page = () => {
     return (
         <div  className='flex flex-col items-center justify-center h-screen '>
             <div className='flex flex-col items-center border rounded-2xl p-5'>
-                <Image src='next.svg' alt='logo'
+                <Image src='vercel.svg' alt='logo'
                 width={400}
                 height={100}
-                className='w-[100px]'/>
+                className='w-[50px] mb-4'
+                />
                 <div className='flex flex-col items-center'>
-                    <Image src='/login.png' alt='login' width={600} height={400} className='w-[400px] h-[250px]'></Image>
+                    <Image src='/login.svg' alt='login' width={600} height={400} className='w-[400px] h-[250px] border rounded-2xl'></Image>
                     <h2 className='text-2xl font-bold text-center mt-5'>Hi! Welcome to Internify</h2>
                     <p className=' text-center'>Sign In with Google</p>
-                    <Button onClick={signInWithGoogle} className='mt-5 w-full'>Continue with Google</Button>
+                    <Button onClick={signInWithGoogle} className='mt-5 w-full '>Continue with Google</Button>
                 </div>
             </div>
         </div>
