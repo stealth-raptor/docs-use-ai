@@ -9,7 +9,7 @@ const Welcome = () => {
     <div className='bg-accent p-5 rounded-xl w-full flex justify-between items-center'>
         <div>
             <h2 className='text-lg font-bold'>Hello There! {user?.name}</h2>
-            <h2 className='text-gray-400'>Insert Motivational Line Here !</h2>
+            <h2 className='text-gray-400'>May the Force be with you</h2>
         </div>
         {user &&<Image src={user?.picture} alt='Avatar' width={50} height={50} className='rounded-full'></Image>}
     </div>

@@ -1,3 +1,4 @@
+"use client"
 import { Input } from '@/components/ui/input'
 import React from 'react'
 import { Textarea } from "@/components/ui/textarea"
@@ -10,17 +11,17 @@ import {
 } from "@/components/ui/select"
 import { Button } from '@/components/ui/button'
 
-const FormContainer = () => {
+const FormContainer = ({onHandleInputChange,GoToNext}) => {
     return (
         <div className='p-5 bg-accent rounded-xl mt-5'>
             <h2 className='mt-2'>Job Position</h2>
-            <Input placeholder='Senior Stormtrooper- Imperial Operations Division' className='mt-2' />
+            <Input placeholder='Senior Stormtrooper- Imperial Operations Division' className='mt-2' onChange={(event)=>onHandleInputChange('jobPosition',event.target.value)}/>
 
             <h2 className='mt-2'>Job Description</h2>
-            <Textarea placeholder='Join the elite ranks of the Empire as a Senior Stormtrooper, where you’ll lead squads, enforce Imperial protocol, and occasionally hit your target. Perfect for those who thrive under pressure (and under helmets).' className='mt-2 h-[150px]' />
+            <Textarea placeholder='Join the elite ranks of the Empire as a Senior Stormtrooper, where you’ll lead squads, enforce Imperial protocol, and occasionally hit your target. Perfect for those who thrive under pressure (and under helmets).' className='mt-2 h-[150px]' onChange={(event)=>onHandleInputChange('jobDescription',event.target.value)}/>
 
             <h2 className='mt-2'>Interview Duration</h2>
-            <Select className='mt-2'>
+            <Select onValueChange={(value)=>onHandleInputChange('duration',value)}>
                 <SelectTrigger className="w-full mt-2">
                     <SelectValue placeholder="Darth Vader's Favourite" />
                 </SelectTrigger>
@@ -33,7 +34,7 @@ const FormContainer = () => {
             </Select>
 
             <h2 className='mt-2'>Interview Type</h2>
-            <Select className='mt-2'>
+            <Select onValueChange={(value)=>onHandleInputChange('interviewType',value)}>
                 <SelectTrigger className="w-full mt-2 mb-2">
                     <SelectValue placeholder="Tie-Fighter Pilot" />
                 </SelectTrigger>
@@ -44,7 +45,7 @@ const FormContainer = () => {
                 </SelectContent>
             </Select>
 
-            <Button className='mt-2 '>
+            <Button className='mt-2 ' onClick={()=>GoToNext()}>
                 Generate Interview
             </Button>
         </div>
