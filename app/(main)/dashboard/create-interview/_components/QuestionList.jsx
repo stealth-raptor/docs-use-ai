@@ -3,11 +3,19 @@ import axios from 'axios';
 import { Loader2Icon } from 'lucide-react';
 import React, { useEffect, useState } from 'react'
 import { toast } from 'sonner';
+import { Button } from '@/components/ui/button';
+import QuestionListContainer from './QuestionListContainer';
+import { supabase } from '@/services/supabaseClient';
+import { useUser } from '@/app/provider';
+import { v4 as uuidv4 } from 'uuid';
 
-const QuestionList = ({ formData }) => {
+
+const QuestionList = ({ formData ,onCreateLink }) => {
 
     const [loading, setLoading] = useState(false);
     const [questionList, setQuestionList] = useState();
+    const [saveLoading,setSaveLoading]=useState(false);
+
     useEffect(() => {
 
         GenQuesList();
@@ -22,26 +30,67 @@ const QuestionList = ({ formData }) => {
     //     });
     // }, []);
 
+//     const mockQuestions = [
+//   {
+//     question: "Describe a time you solved a technical challenge.",
+//     type: "Behavioral",
+//   },
+//   {
+//     question: "What is a hash map? How is it implemented?",
+//     type: "Technical",
+//   },
+//   {
+//     question: "Design a system that handles 100K user requests per second.",
+//     type: "Technical",
+//   },
+// ];
+
+
 
     const GenQuesList = async () => {
         setLoading(true);
         try {
-            console.log("request sent")
+            // console.log("request sent")
             const result = await axios.post('/api/ai-model', {
                 ...formData
             })
-            console.log("response received")
-            console.log(result.data.content);
-            const Content = JSON.parse(result.data.content);
+            // console.log("response received")
+            const Content = result.data.content;
+            const FINAL_JSON = JSON.parse(Content.replace("```json", "").replace("```", "").trim());
 
-            setQuestionList(Content);
+            setQuestionList(FINAL_JSON);
+            // setQuestionList(mockQuestions);
             setLoading(false);
         } catch (e) {
             console.log(e);
-            // toast('⚠️ Server Error, please try again later')
-            // setLoading(false);
+            toast('⚠️ Server Error, please try again later')
+            setLoading(false);
         }
     }
+    const user=useUser();
+
+    const onFinish = async () => {
+        setSaveLoading(true);
+        const interview_id=uuidv4();
+        const { data, error } = await supabase
+            .from('Interviews')
+            .insert([
+                {
+                    ...formData,
+                    questionList:questionList,
+                    userEmail:user?.email,
+                    interview_id:interview_id
+                },
+            ])
+            .select()
+            setSaveLoading(false);
+
+            onCreateLink({
+                interview_id:interview_id,
+            })
+    }
+
+    console.log(questionList);
 
     return (
         <div>
@@ -53,6 +102,13 @@ const QuestionList = ({ formData }) => {
                 </div>
             </div>
             }
+
+            {questionList?.length > 0 &&
+                <QuestionListContainer questionList={questionList}/>}
+
+            <div className='flex justify-end mt-5'>
+                <Button onClick={() => onFinish()} disabled={saveLoading}>{saveLoading&&<Loader2Icon className='animate-spin'/>}Finish</Button>
+            </div>
         </div>
     )
 }

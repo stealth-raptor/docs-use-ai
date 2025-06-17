@@ -50,14 +50,12 @@ Adjust the number and depth of questions to match the interview duration.
 Ensure the questions match the tone and structure of a real-life {type} interview.
 
 Format:  
-interviewQuestions = [  
+[  
   {  
     question: "",  
     type: "Technical" | "Behavioral"  
   },  
-  {  
-    ...  
-  }  
+ 
 ]; 
 
 Respond with nothing but the valid raw JSON object. Do NOT include backticks, markdown formatting, or extra text.

@@ -22,13 +22,13 @@ export async function POST(req) {
         })
 
         const completion = await openai.chat.completions.create({
-            model: "deepseek/deepseek-r1-0528-qwen3-8b:free",
+            model: "google/gemini-2.0-flash-exp:free",
             messages: [
                 { role: "user", content: PROMPT }
             ],
-            response_format: 'json'
+            // response_format: 'json'
         })
-        console.log(completion.choices[0].message);
+        // console.log(completion.choices[0].message);
         return NextResponse.json(completion.choices[0].message)
     } catch (err) {
         console.log(err);
