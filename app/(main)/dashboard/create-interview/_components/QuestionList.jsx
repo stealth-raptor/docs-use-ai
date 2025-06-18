@@ -85,9 +85,7 @@ const QuestionList = ({ formData ,onCreateLink }) => {
             .select()
             setSaveLoading(false);
 
-            onCreateLink({
-                interview_id:interview_id,
-            })
+            onCreateLink(interview_id);
     }
 
     console.log(questionList);
