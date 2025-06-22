@@ -1,6 +1,6 @@
 "use client"
 
-import { Camera, Video } from 'lucide-react';
+import { Camera, Hospital, Video } from 'lucide-react';
 import React, { useState } from 'react'
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
@@ -15,7 +15,7 @@ const DiagnosisList = () => {
         
 
         <div className=' p-5 flex flex-col gap-3 items-center bg-card rounded-xl border border-muted shadow-md'>
-            <Video className='p-3 text-primary bg-border rounded-xl h-12 w-12'/>
+            <Hospital className='p-3 text-primary bg-border rounded-xl h-12 w-12'/>
             <h2 className='font-bold mt-2'>Recently created diagnosis</h2>
             <Button className='mt-2' onClick={()=> router.push('/all-diagnosis')}>Have a look</Button>
         </div>

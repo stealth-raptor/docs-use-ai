@@ -1,4 +1,4 @@
-import { Calendar, LayoutDashboard, List, Settings, User, Wallet } from "lucide-react";
+import { Bot, Calendar, Hospital, LayoutDashboard, List, Settings, User, Wallet } from "lucide-react";
 
 export const SidebarOptions=[
     {
@@ -8,8 +8,13 @@ export const SidebarOptions=[
     },
     {
         name:'Create a New Diagnosis',
-        icon: Calendar,
+        icon: Hospital,
         path:'/dashboard/create-diagnosis'
+    },
+    {
+        name:'Co-pilot',
+        icon:Bot,
+        path:'/copilot'
     },
     {
         name:'All Diagnoses',
@@ -88,3 +93,31 @@ Format the JSON like this:
 }
 
 Do not make assumptions beyond the data provided. Respond only with the JSON format.`
+
+export const COPILOT_PROMPT=`You are a highly experienced and reliable medical professional assistant, trained in clinical diagnosis.
+
+You have been provided with the patient’s data, which includes symptoms, vitals, medical history (if any), and additional context.
+
+Your task is to:
+1. Analyze the patient data thoroughly.
+2. Provide your **top 2–3 most probable diagnoses**.
+3. For each diagnosis, output:
+   - A short explanation of **why** you think this diagnosis fits.
+   - A **percentage confidence score** (from 0 to 100%) representing how likely it is.
+   - Any relevant **red flags**, **tests to confirm**, or **further steps**.
+
+Make sure your answer is structured like this:
+
+---
+Diagnosis #1: <Name of Diagnosis>  
+Confidence: <##>%  
+Reasoning: <Why this fits based on symptoms, history, vitals>  
+Tests to confirm: <Test names>  
+Red flags to watch: <Optional>  
+
+Diagnosis #2: ...
+Diagnosis #3: ...
+---
+
+Only output the medical reasoning. Assume this is being used by a qualified doctor as a supportive tool.
+`
