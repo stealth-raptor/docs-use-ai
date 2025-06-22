@@ -34,7 +34,7 @@ export default function Home() {
         <div className="mt-8 flex gap-4 justify-center">
           <Button
             className="text-2xl px-8 py-6 rounded-2xl"
-            onClick={()=>router.push("/auth")}
+            onClick={()=>router.push("/dashboard")}
           >
             Get Started
           </Button>

@@ -38,8 +38,7 @@ const AllDiagnosis = () => {
 
         <div>
             <div className='flex gap-5 items-center'>
-                    <ArrowLeft onClick={() => router.back()} className='cursor-pointer' />
-                    <h2>All Diagnoses</h2>
+                    
             
                   </div>
             <DiagnosisList diagnosis={diagnosis} />

@@ -10,13 +10,14 @@ const AboutPrescriptionAI = () => {
     const router=useRouter();
     return (
     <>
-            <div className='flex gap-5 items-center'>
+            
+            <div className="max-w-4xl mx-auto px-6">
+                <div className='flex gap-5 items-center'>
                 <ArrowLeft onClick={() => router.back()} className='cursor-pointer' />
                 <h2>About the Project</h2>
 
             </div>
-            <div className="max-w-4xl mx-auto px-6 py-12">
-                <Card className="shadow-md rounded-xl border border-muted">
+                <Card className="shadow-md rounded-xl border border-muted mt-5">
                     <CardHeader>
                         <CardTitle className="text-3xl font-bold">About AI Prescription Generator</CardTitle>
                         <CardDescription className="text-muted-foreground mt-2">

@@ -41,14 +41,15 @@ const DiagnosisId = () => {
 
     return (
         <div>
-            <div className='flex gap-5 items-center'>
+            
+            {data ? (
+                <>
+                    <div className='px-10 md:px-24 lg:px-44 xl:px-56'>
+                        <div className='flex gap-5 items-center'>
                     <ArrowLeft onClick={() => router.back()} className='cursor-pointer' />
                     <h2>Diagnosis</h2>
             
                   </div>
-            {data ? (
-                <>
-                    <div className='px-10 md:px-24 lg:px-44 xl:px-56'>
                     <div className='p-5 bg-card border border-muted shadow-md mt-5 print-letterhead-space rounded-xl'>
                         <h1 className='text-2xl font-bold mt-2 mb-2'>Prescription</h1>
                         <h2><b>Patient Name:</b> {data?.patientName}</h2>
