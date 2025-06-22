@@ -152,8 +152,8 @@
   body {
     @apply bg-background text-foreground;
   }
-/* }
-
+}
+/* 
 .dark {
   --background: oklch(0.2569 0.0169 352.4042);
   --foreground: oklch(0.9397 0.0119 51.3156);
