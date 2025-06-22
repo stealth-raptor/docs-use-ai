@@ -13,7 +13,7 @@ import { Button } from '@/components/ui/button'
 
 const FormContainer = ({ onHandleInputChange, GoToNext }) => {
     return (
-        <div className='p-5 bg-accent rounded-xl mt-5'>
+        <div className='p-5 bg-card rounded-xl border border-muted shadow-md mt-5'>
             <h2 className='mt-2'>Patient Name</h2>
             <Input
                 placeholder='e.g. Rahul Sharma'

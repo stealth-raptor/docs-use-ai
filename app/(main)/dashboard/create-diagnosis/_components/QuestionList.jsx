@@ -75,13 +75,14 @@ const QuestionList = ({ formData, onCreateLink }) => {
 
     const onFinish = async () => {
         const diagnosis_id=uuidv4();
+        console.log(user.user.email);
         const { data, error } = await supabase
             .from('Diagnosis')
             .insert([
                 {
                     ...formData,
                     diagnosis:questionList,
-                    userEmail:user?.email,
+                    userEmail:user.user.email,
                     diagnosis_id:diagnosis_id
                 },
             ])
@@ -117,7 +118,7 @@ const QuestionList = ({ formData, onCreateLink }) => {
 
     return (
         <div>
-            {loading && <div className='p-5 bg-accent rounded-xl border border-gray-100 flex  gap-5 items-center mt-5'>
+            {loading && <div className='p-5  bg-card rounded-xl border border-muted shadow-md flex  gap-5 items-center mt-5'>
                 <Loader2Icon className='animate-spin' />
                 <div>
                     <h2 className='font-bold'>Generating Diagnosis</h2>

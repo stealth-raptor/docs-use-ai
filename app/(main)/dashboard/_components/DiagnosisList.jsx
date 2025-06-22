@@ -3,23 +3,24 @@
 import { Camera, Video } from 'lucide-react';
 import React, { useState } from 'react'
 import { Button } from '@/components/ui/button';
+import { useRouter } from 'next/navigation';
 
 
 const DiagnosisList = () => {
-    const[diagnosisList,setDiagnosisList]=useState([]);
+  const router=useRouter();
   return (
-    <div className='my-5'>
+    <div className='my-5 '>
         <h2 className='my-3 font-bold text-2xl'>Recently Created Diagnosis</h2>
         
-        {diagnosisList?.length==0&&
+        
 
-        <div className=' p-5 flex flex-col gap-3 items-center bg-accent rounded-xl'>
+        <div className=' p-5 flex flex-col gap-3 items-center bg-card rounded-xl border border-muted shadow-md'>
             <Video className='p-3 text-primary bg-border rounded-xl h-12 w-12'/>
-            <h2 className='font-bold mt-2'>You don't have any previously created Diagnosis</h2>
-            <Button className='mt-2'>Get Started</Button>
+            <h2 className='font-bold mt-2'>Recently created diagnosis</h2>
+            <Button className='mt-2' onClick={()=> router.push('/all-diagnosis')}>Have a look</Button>
         </div>
         
-        }
+        
     </div>
   )
 }

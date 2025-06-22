@@ -1,4 +1,4 @@
-import { Calendar, LayoutDashboard, List, Settings, Wallet } from "lucide-react";
+import { Calendar, LayoutDashboard, List, Settings, User, Wallet } from "lucide-react";
 
 export const SidebarOptions=[
     {
@@ -22,9 +22,9 @@ export const SidebarOptions=[
         path:'/billing'
     },
     {
-        name:'Settings',
-        icon:Settings,
-        path:'/settings'
+        name:'About',
+        icon:User,
+        path:'/about'
     }
 ];
 
