@@ -19,7 +19,7 @@ export async function POST(req) {
         })
 
         const completion = await openai.chat.completions.create({
-            model: "deepseek/deepseek-r1-0528-qwen3-8b:free",
+            model: "google/gemini-2.0-flash-exp:free",
             messages: [
                 { role: "user", content: PROMPT }
             ],

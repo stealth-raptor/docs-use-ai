@@ -5,6 +5,7 @@ import React, { useState } from 'react'
 import FormContainer from './_components/FormContainer'
 import QuestionList from './_components/QuestionList'
 import { toast } from 'sonner'
+import DiagnosisContainer from './_components/DiagnosisContainer'
 
 const CreateDiagnosis = () => {
   const [step, setStep] = useState(1);
@@ -48,8 +49,11 @@ const CreateDiagnosis = () => {
       </div>
       {step == 1 ? <FormContainer onHandleInputChange={onHandleInputChange} GoToNext={() => onGoToNext()} />
 
-      : step == 2 ? <QuestionList formData={formData} />
-          :null}
+      : step == 2 ? <DiagnosisContainer formData={formData} GoToNext={() => onGoToNext()}/>
+
+      : step == 3 ? <QuestionList formData={formData} />
+            
+      : null}
     </div>
   )
 }

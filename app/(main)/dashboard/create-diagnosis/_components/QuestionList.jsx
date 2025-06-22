@@ -11,7 +11,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 
 
-const QuestionList = ({ formData, onCreateLink }) => {
+const QuestionList = ({ formData }) => {
 
     const [loading, setLoading] = useState(false);
     const [questionList, setQuestionList] = useState();

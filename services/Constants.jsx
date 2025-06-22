@@ -68,31 +68,82 @@ Your Task:
 Format the JSON like this:
 
 {
-  'patient_name': 'Rahul Sharma',
-  'age': '35',
+  'patient_name': 'XYZ',
+  'age': '00',
   'gender': 'Male',
   'weight': '70kg',
-  'vitals': 'Temp: 101°F, BP: 120/80',
-  'diagnosis': 'Suspected bacterial pharyngitis',
+  'vitals': 'Temp: 00°F, BP: 000/00',
+  'diagnosis': 'Disease Name',
   'prescription': {
     'medications': [
       {
-        'generic_name': 'Paracetamol',
-        'brand_names': ['Calpol', 'Crocin'],
-        'dosage_and_frequency': '500mg every 6 hours',
-        'duration': '3 days',
+        'generic_name': 'XYZ',
+        'brand_names': ['XYZ', 'XYZ'],
+        'dosage_and_frequency': 'XYZmg every XYZ hours',
+        'duration': 'XYZ days',
         'purpose': 'Fever'
       }
     ],
-    'recommended_tests': ['Throat swab culture'],
+    'recommended_tests': ['XYZ XYZ'],
     'follow_up_advice': 'Revisit if symptoms persist after 3 days or worsen',
-    'diet_suggestions': ['Soft foods', 'Warm fluids', 'Avoid spicy foods'],
-    'red_flags': ['High-grade fever persisting beyond 3 days', 'Breathing difficulty']
+    'diet_suggestions': ['XYZ', 'XYZ', 'XYZ'],
+    'red_flags': ['XYZ', 'XYZ']
   },
   'note': 'This is a clinical support suggestion only. Final prescription should be confirmed by the attending physician.'
 }
 
 Do not make assumptions beyond the data provided. Respond only with the JSON format.`
+
+export const DIAGNOSIS_PROMPT = 
+`You are an AI-powered clinical decision support assistant designed to help junior doctors and medical residents practicing in India. Based on the provided patient information, generate a clinically safe, concise, and structured diagnostic suggestion in the form of a JSON object.
+
+Patient Details:
+- Name: {patientName}
+- Age: {patientAge}
+- Gender: {patientGender}
+- Weight: {patientWeight}
+- Vitals: {patientVitals}
+
+Clinical Information:
+- Medical History: {patientHistory}
+- Presenting Symptoms: {patientSymptoms}
+- Known Allergies: {patientAllergies}
+- Provisional / Final Diagnosis (by doctor): {patientDiagnosis}
+
+Your Task:
+1. Analyze the patient information carefully.
+2. Output a list of at least 2 and maximum 4 differential diagnoses.
+3. For each diagnosis, provide:
+   - diagnosis_name: The name of the likely condition
+   - confidence: A percentage from 0–100
+   - reasoning: A short, one-line justification based on symptoms, vitals, and history
+
+Important Guidelines:
+- Keep each diagnosis in a single line object.
+- Do not include explanations or text outside the JSON.
+- Only output structured JSON like the example below.
+- Focus on common conditions in India like dengue, typhoid, tuberculosis, malaria, respiratory and gastrointestinal infections.
+- Avoid speculative or rare diagnoses not supported by the data.
+
+Format your response like this:
+
+{
+  "diagnoses": [
+    {
+      "diagnosis_name": "XYZ",
+      "confidence": 00,
+      "reasoning": "XYZ"
+    },
+    {
+      "diagnosis_name": "XYZ",
+      "confidence": 00,
+      "reasoning": "XYZ"
+    }
+  ]
+}
+
+Respond only with the JSON format. Do not return markdown or extra commentary.`
+
 
 export const COPILOT_PROMPT=`You are a highly experienced and reliable medical professional assistant, trained in clinical diagnosis.
 

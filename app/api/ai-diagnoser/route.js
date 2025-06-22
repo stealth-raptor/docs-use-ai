@@ -1,4 +1,4 @@
-import { QUESTION_PROMPT } from "@/services/Constants";
+import { DIAGNOSIS_PROMPT } from "@/services/Constants";
 import { NextResponse } from "next/server";
 import OpenAI from "openai"
 
@@ -17,7 +17,7 @@ export async function POST(req) {
 
 
 
-    const PROMPT = QUESTION_PROMPT
+    const PROMPT = DIAGNOSIS_PROMPT
         .replaceAll('{patientName}', patientName)
         .replaceAll('{patientAge}', patientAge)
         .replaceAll('{patientGender}', patientGender)
