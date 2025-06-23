@@ -57,6 +57,7 @@ const DiagnosisContainer = ({formData, GoToNext}) => {
             }
 
             {list &&
+            
                 list.diagnoses.map((item,index)=>{
                     return (
                     <div key={index} className='p-5  bg-card rounded-xl border border-muted shadow-md  gap-5 mt-5 w-full'>

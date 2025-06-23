@@ -19,7 +19,7 @@ const AboutPrescriptionAI = () => {
             </div>
                 <Card className="shadow-md rounded-xl border border-muted mt-5">
                     <CardHeader>
-                        <CardTitle className="text-3xl font-bold">About AI Prescription Generator</CardTitle>
+                        <CardTitle className="text-3xl font-bold">About the project</CardTitle>
                         <CardDescription className="text-muted-foreground mt-2">
                             A Clinical Decision Support Tool (CDST) that automatically generates prescription suggestions based on patient details and diagnosis.
                         </CardDescription>

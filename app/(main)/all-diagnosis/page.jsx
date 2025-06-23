@@ -37,10 +37,6 @@ const AllDiagnosis = () => {
     return (
 
         <div>
-            <div className='flex gap-5 items-center'>
-                    
-            
-                  </div>
             <DiagnosisList diagnosis={diagnosis} />
         </div>
     )

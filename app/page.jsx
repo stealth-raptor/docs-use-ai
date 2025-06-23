@@ -11,20 +11,18 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-primary/30 to-background text-foreground flex flex-col items-center justify-center px-4 font-sans">
+    <div className="min-h-screen bg-gradient-to-b from-primary/30 to-background text-foreground flex flex-col items-center justify-center px-4">
 
-      {/* Header */}
       <header className="absolute top-6 left-6 flex items-center gap-2 w-350">
         <div className="flex justify-between w-full items-center">
-          <h2 className="text-2xl font-extrabold tracking-tight">DoC.AI</h2>
+          <h2 className="text-2xl">DoC.AI</h2>
           <Button onClick={()=>router.push("/auth")}>Sign In</Button>
         </div>
       </header>
 
-      {/* Hero Content */}
       <main className="text-center">
-        <Badge variant="secondary" className='border-1 border-black p-1.5 font-semibold tex-2xl'>🔥Reliable and Fast</Badge>
-        <h1 className="text-5xl sm:text-5xl md:text-6xl font-extrabold leading-tight">
+        <Badge variant="secondary" className='border-1 border-black p-1.5  text-md'>🔥Reliable and Fast</Badge>
+        <h1 className="text-5xl sm:text-5xl md:text-6xl leading-tight">
           AI-Powered <br />
           <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
             Clinical Decision Support Tool
