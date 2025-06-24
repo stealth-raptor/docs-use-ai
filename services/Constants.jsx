@@ -114,9 +114,9 @@ Your Task:
 1. Analyze the patient information carefully.
 2. Output a list of at least 2 and maximum 4 differential diagnoses.
 3. For each diagnosis, provide:
-   - diagnosis_name: The name of the likely condition
+   - diagnosis_name: The scientific name of the likely condition
    - confidence: A percentage from 0–100
-   - reasoning: A short, one-line justification based on symptoms, vitals, and history
+   - reasoning: A short, two-line justification based on symptoms, vitals, and history make it technical and scientific as possible
 
 Important Guidelines:
 - Keep each diagnosis in a single line object.
