@@ -13,15 +13,16 @@ export async function POST(req) {
     try {
 
         const openai = new OpenAI({
-            baseURL: "https://openrouter.ai/api/v1",
-            apiKey: process.env.OPENROUTER_API_KEY,
+            baseURL: "https://generativelanguage.googleapis.com/v1beta/openai/",
+            apiKey: process.env.GEMINI_API_KEY,
 
         })
 
         const completion = await openai.chat.completions.create({
-            model: "google/gemini-2.0-flash-exp:free",
+            model: "gemini-2.5-flash",
             messages: [
-                { role: "user", content: PROMPT }
+                { role: "system", content: COPILOT_PROMPT },
+                { role: "user", content: body.prompt }
             ],
         })
         console.log(completion.choices[0].message);
