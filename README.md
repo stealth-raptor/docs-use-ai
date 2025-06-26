@@ -13,6 +13,25 @@ DoC.AI is an AI-powered clinical decision support system tailored for junior doc
 - **💊 Prescription Generator**  
   Automatically generates concise and safe prescriptions based on the diagnosis. It includes dosage, timing, and important instructions, all formatted into a clean JSON structure. The prescriptions adhere to standard clinical guidelines and reduce time spent on manual entry.
 
+- **📃 Smart Summaries (Coming Soon)** 
+Generate detailed yet concise clinical notes and patient visit summaries that are EMR-ready. Ideal for documentation, referrals, and medico-legal use cases.
+
+- **🔍 Powered By Cutting-Edge AI** 
+DoC.AI now leverages Gemini 2.5 Flash, Google's latest multimodal large language model, for improved contextual reasoning, faster inference, and enhanced medical language understanding.
+
+## 🚀 Product Demo
+<div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center;">
+  <img src="https://github.com/Aryan23Sethi/docs-use-ai/blob/main/public/Screenshot%202025-06-26%20184504.png?raw=true" width="45%">
+  <img src="https://github.com/Aryan23Sethi/docs-use-ai/blob/main/public/Screenshot%202025-06-26%20184357.png?raw=true" width="45%">
+  
+  <img src="https://github.com/Aryan23Sethi/docs-use-ai/blob/main/public/Screenshot%202025-06-26%20184426.png?raw=true" width="45%">
+  <img src="https://github.com/Aryan23Sethi/docs-use-ai/blob/main/public/Screenshot%202025-06-26%20184449.png?raw=true" width="45%">
+  
+  <img src="https://github.com/Aryan23Sethi/docs-use-ai/blob/main/public/Screenshot%202025-06-26%20184549.png?raw=true" width="45%">
+  <img src="https://github.com/Aryan23Sethi/docs-use-ai/blob/main/public/Screenshot%202025-06-26%20184626.png?raw=true" width="45%">
+</div>
+
+
 ## 🛠 Tech Stack
 
 - **Next.js** 
@@ -26,3 +45,9 @@ DoC.AI is an AI-powered clinical decision support system tailored for junior doc
 - **Supabase**
 
 - **OpenAI API**
+
+## ✨ Future Roadmap
+
+🔐 Patient Identity & History Management via unique IDs
+
+📈 Analytics on diagnosis frequency, treatment efficacy
