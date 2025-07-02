@@ -15,6 +15,24 @@ export async function POST(req) {
         patientWeight
     } = await req.json();
 
+    
+    const sbURL = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const sbAPI = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+    const geminiAPI = process.env.GEMINI_API_KEY;
+    const embeddings = new new GoogleGenerativeAIEmbeddings({
+        model: "text-embedding-004", // 768 dimensions
+        taskType: TaskType.RETRIEVAL_DOCUMENT,
+        title: "Document title",
+        apiKey: geminiAPI
+    })
+    const client = createClient(sbURL, sbAPI)
+
+    const vectorStore = new SupabaseVectorStore(embeddings, {
+        client,
+        tableName: 'documents',
+        queryName: 'match_documents'
+    })
+
 
 
     const PROMPT = DIAGNOSIS_PROMPT
