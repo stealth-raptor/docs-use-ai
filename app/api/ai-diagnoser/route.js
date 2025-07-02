@@ -1,6 +1,12 @@
 import { DIAGNOSIS_PROMPT } from "@/services/Constants";
 import { NextResponse } from "next/server";
 import OpenAI from "openai"
+import { createClient } from "@supabase/supabase-js";
+import { SupabaseVectorStore } from "@langchain/community/vectorstores/supabase";
+import { GoogleGenerativeAIEmbeddings } from "@langchain/google-genai";
+import { TaskType } from "@google/generative-ai";
+import dotenv from "dotenv";
+dotenv.config({ path: ".env.local" });
 
 export async function POST(req) {
     const {
@@ -15,11 +21,11 @@ export async function POST(req) {
         patientWeight
     } = await req.json();
 
-    
+
     const sbURL = process.env.NEXT_PUBLIC_SUPABASE_URL;
     const sbAPI = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
     const geminiAPI = process.env.GEMINI_API_KEY;
-    const embeddings = new new GoogleGenerativeAIEmbeddings({
+    const embeddings = new GoogleGenerativeAIEmbeddings({
         model: "text-embedding-004", // 768 dimensions
         taskType: TaskType.RETRIEVAL_DOCUMENT,
         title: "Document title",
@@ -35,6 +41,26 @@ export async function POST(req) {
 
 
 
+    const retrieverQuery = `
+        A ${patientAge}-year-old ${patientGender} named ${patientName} presents with:
+        - Symptoms: ${patientSymptoms}
+        - Medical history: ${patientHistory}
+        - Allergies: ${patientAllergies}
+        - Vitals: ${patientVitals}
+        - Current diagnosis: ${patientDiagnosis}
+        - Weight: ${patientWeight} kg
+
+        What guidance or treatment does the WHO recommend for this profile?`;
+
+    const retriever = vectorStore.asRetriever({ k: 7 });
+
+    const relevantDocs = await retriever.invoke(retrieverQuery);
+
+    // console.log(relevantDocs);
+    // console.log('succ');
+
+
+
     const PROMPT = DIAGNOSIS_PROMPT
         .replaceAll('{patientName}', patientName)
         .replaceAll('{patientAge}', patientAge)
@@ -46,7 +72,12 @@ export async function POST(req) {
         .replaceAll('{patientVitals}', patientVitals)
         .replaceAll('{patientWeight}', patientWeight);
 
-    console.log(PROMPT);
+    const context = relevantDocs.map(doc => doc.pageContent).join("\n\n");
+
+    const finalPrompt = PROMPT + `\n\nWHO Guidelines Context:\n${context}`;
+
+    // console.log(finalPrompt);
+
 
     try {
 
@@ -59,7 +90,7 @@ export async function POST(req) {
         const completion = await openai.chat.completions.create({
             model: "gemini-2.5-flash",
             messages: [
-                { role: "user", content: PROMPT }
+                { role: "user", content: finalPrompt }
             ],
         })
         console.log(completion.choices[0].message);
