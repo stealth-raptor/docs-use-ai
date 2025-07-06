@@ -1,79 +1,100 @@
-"use client"
+"use client";
 
 import { UserDetailContext } from '@/context/UserDetailContext';
-import { supabase } from '@/services/supabaseClient'
+import { supabase } from '@/services/supabaseClient';
 import { Loader2Icon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react';
+import { toast } from 'sonner';
 
 const Provider = ({ children }) => {
-    const [user, setUser] = useState();
-    const router = useRouter();
-    const [loading,setLoading]=useState(true);
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
+  const initUser = async () => {
+    const {
+      data: { user: authUser },
+      error: authError,
+    } = await supabase.auth.getUser();
 
-    const createNewUser = () => {
-        supabase.auth.getUser()
-            .then(async ({ data: { user } }) => {
-                let { data: Users, error } = await supabase
-                    .from('Users')
-                    .select("*")
-                    .eq('email', user?.email);
-
-
-                console.log(Users);
-
-                if (Users?.length == 0) {
-                    const { data, error } = await supabase.from("Users")
-                        .insert([
-                            {
-                                name: user?.user_metadata?.name,
-                                email: user?.email,
-                                picture: user?.user_metadata?.picture
-                            }
-                        ])
-                    // console.log(data);
-                    setUser(data);
-                    return;
-                }
-                setLoading(false);
-                setUser(Users[0]);
-
-            })
+    if (authError || !authUser) {
+      console.error(authError || 'User not logged in');
+      toast('You are not logged in.');
+      router.push('/auth');
+      setLoading(false);
+      return;
     }
 
-    const checkUser =  () => {
-        supabase.auth.getUser()
-            .then(async ({ data: { user } }) => {
-                let { data: Users, error } = await supabase
-                    .from('Users')
-                    .select("*")
-                    .eq('email', user?.email);
+    const { email, user_metadata } = authUser;
+    const name = user_metadata?.name;
+    const picture = user_metadata?.picture;
 
-            if(Users?.length==0){
-                router.push("/auth");
-            }
-            setLoading(false);
-    })
-    };
+    if (!email || !name) {
+      toast('Incomplete user data.');
+      router.push('/auth');
+      setLoading(false);
+      return;
+    }
 
+    const { data: users, error: fetchError } = await supabase
+      .from('Users')
+      .select('*')
+      .eq('email', email);
 
-    useEffect(() => {
-        createNewUser();
-        checkUser();
-    }, [])
+    if (fetchError) {
+      console.error(fetchError);
+      toast('Error fetching user data');
+      router.push('/auth');
+      setLoading(false);
+      return;
+    }
 
-    return (
-        <UserDetailContext.Provider value={{ user, setUser }} >
-            {loading?null:<div>{children}</div>}
-            
-        </UserDetailContext.Provider>
-    )
-}
+    if (!users || users.length === 0) {
+      const { data: newUser, error: insertError } = await supabase
+        .from('Users')
+        .insert([{ name, email, picture }])
+        .select();
 
-export default Provider
+      if (insertError || !newUser || newUser.length === 0) {
+        console.error(insertError);
+        toast('Failed to create user.');
+        router.push('/auth');
+        setLoading(false);
+        return;
+      }
 
-export const useUser = () => {
-    const context = useContext(UserDetailContext);
-    return context;
-}
+      setUser(newUser[0]);
+    } else {
+      setUser(users[0]); 
+    }
+
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    initUser();
+  }, []);
+
+  return (
+    <UserDetailContext.Provider value={{ user, setUser }}>
+      {loading ? (
+        <div className="min-h-screen flex items-center justify-center px-6 md:px-24 lg:px-44 xl:px-56 bg-background">
+          <div className="w-full max-w-xl bg-card border border-muted rounded-2xl shadow-md p-6 flex items-center gap-4">
+            <Loader2Icon className="animate-spin text-primary w-6 h-6" />
+            <div>
+              <h2 className="text-lg font-semibold text-foreground">Loading</h2>
+              <p className="text-sm text-muted-foreground">Please wait while we log you in</p>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div>{children}</div>
+      )}
+    </UserDetailContext.Provider>
+  );
+};
+
+export default Provider;
+
+export const useUser = () => useContext(UserDetailContext);

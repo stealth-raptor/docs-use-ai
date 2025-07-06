@@ -16,7 +16,6 @@ export default function Home() {
       <header className="absolute top-6 left-6 flex items-center gap-2 w-350">
         <div className="flex justify-between w-full items-center">
           <h2 className="text-2xl">DoC.AI</h2>
-          <Button onClick={()=>router.push("/auth")}>Sign In</Button>
         </div>
       </header>
 

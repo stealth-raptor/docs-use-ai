@@ -39,7 +39,7 @@ const DiagnosisList = () => {
     };
 
   useEffect(() => {
-    console.log(user.email);
+    console.log(user?.email);
     if (user) fetchData();
   },[]);
 
