@@ -2,7 +2,7 @@
 import * as React from "react"
 import { Slot } from "@radix-ui/react-slot"
 import { cva } from "class-variance-authority";
-import { Menu, PanelLeftIcon } from "lucide-react"
+import { LogOut, Menu, PanelLeftIcon, Router } from "lucide-react"
 
 import { useIsMobile } from "@/hooks/use-mobile"
 import { cn } from "@/lib/utils"
@@ -23,6 +23,8 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
+import { supabase } from "@/services/supabaseClient";
+import { useRouter } from "next/navigation";
 
 const SIDEBAR_COOKIE_NAME = "sidebar_state"
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7
@@ -226,23 +228,35 @@ function SidebarTrigger({
   onClick,
   ...props
 }) {
+  const router=useRouter();
+  async function signOut() {
+     await supabase.auth.signOut({scope:'global'});
+     router.push('/');
+  }
+
   const { toggleSidebar } = useSidebar()
 
   return (
-    <Button
-      data-sidebar="trigger"
-      data-slot="sidebar-trigger"
-      variant="ghost"
-      size="icon"
-      className={cn("size-10 mt-1.5 ml-1.5", className)}
-      onClick={(event) => {
-        onClick?.(event)
-        toggleSidebar()
-      }}
-      {...props}>
-      <Menu className="w-[100px] h-[100px]"/>
-      <span className="sr-only">Toggle Sidebar</span>
-    </Button>
+    <div className="flex justify-between items-center">
+      <Button
+        data-sidebar="trigger"
+        data-slot="sidebar-trigger"
+        variant="ghost"
+        size="icon"
+        className={cn("size-10 mt-1.5 ml-1.5", className)}
+        onClick={(event) => {
+          onClick?.(event)
+          toggleSidebar()
+        }}
+        {...props}>
+        <Menu className="w-[100px] h-[100px]" />
+        <span className="sr-only">Toggle Sidebar</span>
+      </Button>
+
+      <Button onClick={() => signOut()} className='mt-2 mr-2 p-2.5'>
+        <LogOut/>Log Out
+      </Button>
+    </div>
   );
 }
 
@@ -538,7 +552,7 @@ function SidebarMenuAction({
         "peer-data-[size=lg]/menu-button:top-2.5",
         "group-data-[collapsible=icon]:hidden",
         showOnHover &&
-          "peer-data-[active=true]/menu-button:text-sidebar-accent-foreground group-focus-within/menu-item:opacity-100 group-hover/menu-item:opacity-100 data-[state=open]:opacity-100 md:opacity-0",
+        "peer-data-[active=true]/menu-button:text-sidebar-accent-foreground group-focus-within/menu-item:opacity-100 group-hover/menu-item:opacity-100 data-[state=open]:opacity-100 md:opacity-0",
         className
       )}
       {...props} />

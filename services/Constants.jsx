@@ -1,4 +1,4 @@
-import { Bot, Calendar, Hospital, LayoutDashboard, List, Settings, User, Wallet } from "lucide-react";
+import { Bot, Calendar, Hospital, LayoutDashboard, List, LogOut, Settings, User, Wallet } from "lucide-react";
 
 export const SidebarOptions=[
     {
@@ -20,11 +20,6 @@ export const SidebarOptions=[
         name:'All Diagnoses',
         icon:List,
         path:'/all-diagnosis'
-    },
-    {
-        name:'Payments',
-        icon:Wallet,
-        path:'/billing'
     },
     {
         name:'About',

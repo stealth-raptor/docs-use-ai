@@ -11,7 +11,6 @@ const CreateDiagnosis = () => {
   const [step, setStep] = useState(1);
   const router = useRouter();
   const [formData, setFormData] = useState();
-  const [interviewId, setInterviewId] = useState();
 
   const onHandleInputChange = (field, value) => {
     setFormData(prev => ({
