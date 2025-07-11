@@ -1,6 +1,6 @@
 "use client"
 import { Input } from '@/components/ui/input'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Textarea } from "@/components/ui/textarea"
 import {
     Select,
@@ -10,10 +10,26 @@ import {
     SelectValue,
 } from "@/components/ui/select"
 import { Button } from '@/components/ui/button'
+import { v4 as uuidv4 } from 'uuid'
 
 const FormContainer = ({ onHandleInputChange, GoToNext }) => {
+
+    const [patientId, setPatientId] = useState('');
+
+    useEffect(() => {
+        const id = uuidv4();
+        setPatientId(id);
+        onHandleInputChange('patientId', id);
+    }, [])
     return (
         <div className='p-5 bg-card rounded-xl border border-muted shadow-md mt-5'>
+            <h2 className='mt-2'>Patient ID</h2>
+            <Input
+                value={patientId}
+                disabled
+                className='mt-2'
+            />
+
             <h2 className='mt-2'>Patient Name</h2>
             <Input
                 placeholder='e.g. Rahul Sharma'
