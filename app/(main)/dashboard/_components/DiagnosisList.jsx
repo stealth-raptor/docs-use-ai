@@ -51,22 +51,22 @@ const DiagnosisList = () => {
         <div className="grid md:grid-cols-3 gap-4">
           <div className="bg-card border border-muted shadow-md rounded-xl p-5 flex flex-col items-center text-center">
             <Hospital className='p-3 text-primary bg-border rounded-xl h-12 w-12' />
-            <h3 className="text-lg font-semibold">Total Diagnoses</h3>
-            <p className="text-2xl font-bold mt-1">{diagnosis.length}</p>
+            <h3 className="font-bold mt-2">Total Diagnoses</h3>
+            <p className="text-gray-400 mt-2">{diagnosis.length}</p>
           </div>
 
           
           <div className="bg-card border border-muted shadow-md rounded-xl p-5 flex flex-col items-center text-center">
             <CalendarCheck className='p-3 text-primary bg-border rounded-xl h-12 w-12' />
-            <h3 className="text-lg font-semibold">Diagnoses Today</h3>
-            <p className="text-2xl font-bold mt-1">{todayCount}</p>
+            <h3 className="font-bold mt-2">Diagnoses Today</h3>
+            <p className="text-gray-400 mt-2">{todayCount}</p>
           </div>
 
           <div className="bg-card border border-muted shadow-md rounded-xl p-5 flex flex-col items-center text-center">
             <FolderPlus className='p-3 text-primary bg-border rounded-xl h-12 w-12' />
-            <h3 className="text-lg font-semibold">Recently created diagnosis</h3>
+            <h3 className="font-bold mt-2">Recently created diagnosis</h3>
             <Button className="mt-3" onClick={() => router.push("/all-diagnosis")}>
-              View
+              View All
             </Button>
           </div>
         </div>

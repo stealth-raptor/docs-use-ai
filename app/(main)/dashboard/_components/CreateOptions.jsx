@@ -14,13 +14,13 @@ import React from 'react'
             </div>
             <div className='bg-card border border-muted shadow-md flex flex-col rounded-xl p-5 cursor-pointer justify-center items-center w-full' onClick={()=> router.push('/dashboard/patient')}>
                 <ClipboardPlus className='p-3 text-primary bg-border rounded-xl h-12 w-12'/>
-                <h2 className='font-bold mt-2'>Select existing Patient</h2>
-                <p className='text-gray-400 mt-2'>Get started by selecting an existing Patient</p>
+                <h2 className='font-bold mt-2'>Select Existing Patient</h2>
+                <p className='text-gray-400 mt-2'>Get started by selecting a Patient</p>
             </div>
             <div className='bg-card border border-muted shadow-md flex flex-col rounded-xl p-5 cursor-pointer justify-center items-center w-full' onClick={()=> router.push('/copilot')}>
                 <Bot className='p-3 text-primary bg-border rounded-xl h-12 w-12'/>
                 <h2 className='font-bold mt-2'>Diagnosis Copilot</h2>
-                <p className='text-gray-400 mt-2'>Validate your diagnosis with AI-backed Copilot</p>
+                <p className='text-gray-400 mt-2'>Validate your diagnosis with AI-Copilot</p>
             </div>
         </div>
       )

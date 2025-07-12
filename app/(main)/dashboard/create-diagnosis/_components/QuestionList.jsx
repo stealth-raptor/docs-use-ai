@@ -8,6 +8,8 @@ import QuestionListContainer from './QuestionListContainer';
 import { supabase } from '@/services/supabaseClient';
 import { useUser } from '@/app/provider';
 import { v4 as uuidv4 } from 'uuid';
+import { useSearchParams } from "next/navigation";
+
 
 
 
@@ -76,6 +78,8 @@ const QuestionList = ({ formData }) => {
     const onFinish = async () => {
         const diagnosis_id=uuidv4();
         console.log(user.user.email);
+        console.log(formData);
+        
         const { data, error } = await supabase
             .from('Diagnosis')
             .insert([
@@ -83,7 +87,7 @@ const QuestionList = ({ formData }) => {
                     ...formData,
                     diagnosis:questionList,
                     userEmail:user.user.email,
-                    diagnosis_id:diagnosis_id
+                    diagnosis_id:diagnosis_id,
                 },
             ])
             .select()

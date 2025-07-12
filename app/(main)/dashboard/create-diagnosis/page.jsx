@@ -10,7 +10,19 @@ import DiagnosisContainer from './_components/DiagnosisContainer'
 const CreateDiagnosis = () => {
   const [step, setStep] = useState(1);
   const router = useRouter();
-  const [formData, setFormData] = useState();
+  const [formData, setFormData] = useState({
+    patientName: "",
+    patientAge: "",
+    patientWeight: "",
+    patientGender: "",
+    patientHistory: "",
+    patientAllergies: "",
+    patientSymptoms: "",
+    patientVitals: "",
+    patientDiagnosis: "",
+    patient_id: "", 
+  });
+
 
   const onHandleInputChange = (field, value) => {
     setFormData(prev => ({
@@ -46,13 +58,13 @@ const CreateDiagnosis = () => {
         <h2>Create New Diagnosis</h2>
 
       </div>
-      {step == 1 ? <FormContainer onHandleInputChange={onHandleInputChange} GoToNext={() => onGoToNext()} />
+      {step == 1 ? <FormContainer formData={formData} onHandleInputChange={onHandleInputChange} GoToNext={() => onGoToNext()} />
 
-      : step == 2 ? <DiagnosisContainer formData={formData} GoToNext={() => onGoToNext()}/>
+        : step == 2 ? <DiagnosisContainer formData={formData} GoToNext={() => onGoToNext()} />
 
-      : step == 3 ? <QuestionList formData={formData} />
-            
-      : null}
+          : step == 3 ? <QuestionList formData={formData} />
+
+            : null}
     </div>
   )
 }

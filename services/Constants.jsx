@@ -1,4 +1,4 @@
-import { Bot, Calendar, Hospital, LayoutDashboard, List, LogOut, Settings, User, Wallet } from "lucide-react";
+import { Bot, BriefcaseMedical, Calendar, Hospital, LayoutDashboard, List, LogOut, Settings, User, Wallet } from "lucide-react";
 
 export const SidebarOptions=[
     {
@@ -10,6 +10,11 @@ export const SidebarOptions=[
         name:'Create a New Diagnosis',
         icon: Hospital,
         path:'/dashboard/create-diagnosis'
+    },
+    {
+        name:'Patient',
+        icon:BriefcaseMedical,
+        path:'/dashboard/patient'
     },
     {
         name:'Co-pilot',
