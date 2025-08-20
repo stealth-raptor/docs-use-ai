@@ -3,7 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ui/theme-provider";
 import Provider from "./provider";
-import ClarityProvider from "./clarity-provider"; // 👈 import client wrapper
+import ClarityProvider from "./clarity-provider"; 
+import MixpanelProvider from "./mixpanel-provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,7 +34,8 @@ export default function RootLayout({ children }) {
           disableTransitionOnChange
         >
           <Provider>
-            <ClarityProvider /> {/* 👈 runs clarity on client */}
+            <MixpanelProvider /> 
+            <ClarityProvider /> 
             {children}
           </Provider>
         </ThemeProvider>
